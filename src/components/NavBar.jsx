@@ -1,10 +1,20 @@
-import React from 'react'
-
+import React from "react";
+import { useSelector } from "react-redux";
+import logo from "../assets/images/logo.png";
+import avatar from "../assets/images/avatar.png";
 const NavBar = () => {
+  const user = useSelector((state) => state.user);
   return (
     <div className="navbar bg-base-300 shadow-sm">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">DevTinder</a>
+        <a className="btn btn-ghost text-xl gap-2">
+          <img
+            src={logo}
+            alt="DevTinder Logo"
+            className="w-10 h-10 rounded-full"
+          />
+          DevTinder
+        </a>
       </div>
       <div className="flex gap-2">
         <div className="dropdown dropdown-end mx-5">
@@ -13,12 +23,15 @@ const NavBar = () => {
             role="button"
             className="btn btn-ghost btn-circle avatar"
           >
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
-            </div>
+            {user ? (
+              <div className="w-10 rounded-full">
+                <img alt="User Profile Photo" src={user.profilePhoto} />
+              </div>
+            ) : (
+              <div className="w-10 rounded-full">
+                <img alt="User Profile Photo" src={avatar} />
+              </div>
+            )}
           </div>
           <ul
             tabIndex="-1"
@@ -41,6 +54,6 @@ const NavBar = () => {
       </div>
     </div>
   );
-}
+};
 
-export default NavBar
+export default NavBar;

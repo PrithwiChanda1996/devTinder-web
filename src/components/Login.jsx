@@ -1,12 +1,15 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useToast } from "../context/ToastContext";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   const [loginMethod, setLoginMethod] = useState("email");
   const [identifier, setIdentifier] = useState("john.doe@example.com");
   const [password, setPassword] = useState("SecurePass123");
   const { addToast } = useToast();
+  const dispatch = useDispatch();
 
   const getInputConfig = () => {
     switch (loginMethod) {
@@ -21,42 +24,61 @@ const Login = () => {
     }
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     const payloadKey = loginMethod === "phone" ? "mobileNumber" : loginMethod;
     const payload = {
       [payloadKey]: identifier,
       password,
     };
 
-    axios
-      .post("http://localhost:3000/api/auth/login", payload, {
+    try {
+      const baseUrl = "http://localhost:3000/api";
+      const res = await axios.post(`${baseUrl}/auth/login`, payload, {
         withCredentials: true,
-      })
-      .then((res) => {
-        if (res.data.success) {
-          // Store user info in localStorage
-          localStorage.setItem("userId", res.data.data.id);
-          localStorage.setItem("username", res.data.data.username);
-
-          addToast("success", res.data.message);
-        }
-      })
-      .catch((err) => {
-        const response = err.response?.data;
-        if (response?.message) {
-          if (Array.isArray(response.message)) {
-            // Validation errors - show multiple warning toasts
-            response.message.forEach((msg) => {
-              addToast("warning", msg);
-            });
-          } else {
-            // Single error message
-            addToast("error", response.message);
-          }
-        } else {
-          addToast("error", "An unexpected error occurred");
-        }
       });
+      if (res.data.success) {
+        const { id, username, accessToken } = res.data.data;
+        
+        // Store user info and token in localStorage
+        localStorage.setItem("userId", id);
+        localStorage.setItem("username", username);
+        localStorage.setItem("accessToken", accessToken);
+        
+        // Show success toast immediately
+        addToast("success", res.data.message);
+        
+        // Fetch full user profile (non-blocking)
+        try {
+          const user = await axios.get(`${baseUrl}/users/${id}`, {
+            withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          });
+          if (user.data.success) {
+            dispatch(addUser(user.data.data));
+          }
+        } catch (userError) {
+          console.error("Failed to fetch user profile:", userError);
+          // Don't show error toast - login was still successful
+        }
+      }
+    } catch (error) {
+      const response = error.response?.data;
+      if (response?.message) {
+        if (Array.isArray(response.message)) {
+          // Validation errors - show multiple warning toasts
+          response.message.forEach((msg) => {
+            addToast("warning", msg);
+          });
+        } else {
+          // Single error message
+          addToast("error", response.message);
+        }
+      } else {
+        addToast("error", "An unexpected error occurred");
+      }
+    }
   };
 
   return (
