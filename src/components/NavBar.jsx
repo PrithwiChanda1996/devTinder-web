@@ -2,8 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import logo from "../assets/images/logo.png";
 import avatar from "../assets/images/avatar.png";
+import { useAuth } from "../hooks/useAuth";
 const NavBar = () => {
   const user = useSelector((state) => state.user);
+  const { handleLogout } = useAuth();
   return (
     <div className="navbar bg-base-300 shadow-sm">
       <div className="flex-1">
@@ -17,7 +19,11 @@ const NavBar = () => {
         </a>
       </div>
       <div className="flex gap-2">
-        {user && <p className="text-sm font-bold flex items-center gap-2">Welcome, {user.username}</p>}
+        {user && (
+          <p className="text-sm font-bold flex items-center gap-2">
+            Welcome, {user.username}
+          </p>
+        )}
         <div className="dropdown dropdown-end mx-5">
           <div
             tabIndex={0}
@@ -48,7 +54,7 @@ const NavBar = () => {
               <a>Settings</a>
             </li>
             <li>
-              <a>Logout</a>
+              <a onClick={handleLogout}>Logout</a>
             </li>
           </ul>
         </div>

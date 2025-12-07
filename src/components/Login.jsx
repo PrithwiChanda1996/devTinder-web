@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import { useToast } from "../context/ToastContext";
 import { addUser } from "../utils/userSlice";
 import { BASE_URL } from "../utils/constants";
+import { setStoredAuth } from "../utils/authUtils";
 const Login = () => {
   const [loginMethod, setLoginMethod] = useState("email");
   const [identifier, setIdentifier] = useState("john.doe@example.com");
@@ -39,19 +40,17 @@ const Login = () => {
         withCredentials: true,
       });
       if (res.data.success) {
-        const { id, username, accessToken } = res.data.data;
-        
-        // Store user info and token in localStorage
-        localStorage.setItem("userId", id);
-        localStorage.setItem("username", username);
-        localStorage.setItem("accessToken", accessToken);
-        
+        const { accessToken } = res.data.data;
+
+        // Store only access token in localStorage
+        setStoredAuth({ accessToken });
+
         // Show success toast immediately
         addToast("success", res.data.message);
-        
-        // Fetch full user profile (non-blocking)
+
+        // Fetch full user profile using the new endpoint
         try {
-          const user = await axios.get(`${baseUrl}/users/${id}`, {
+          const user = await axios.get(`${baseUrl}/users/profile`, {
             withCredentials: true,
             headers: {
               Authorization: `Bearer ${accessToken}`,
