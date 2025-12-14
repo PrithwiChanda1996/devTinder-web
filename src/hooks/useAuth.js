@@ -10,6 +10,7 @@ import {
   setStoredAuth,
 } from "../utils/authUtils";
 import { useToast } from "../context/ToastContext";
+import { removeFeed } from "../utils/feedSlice";
 
 export const useAuth = () => {
   const dispatch = useDispatch();
@@ -156,6 +157,7 @@ export const useAuth = () => {
     // Clear local storage and Redux state
     clearStoredAuth();
     dispatch(removeUser());
+    dispatch(removeFeed());
     restoringSession.current = false; // Reset restoration flag
     navigate("/login");
   };

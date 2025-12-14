@@ -4,12 +4,13 @@ import connect from '../assets/images/connect.png';
 import block from '../assets/images/block.png';
 import ignore from '../assets/images/ignore.png';
 const userCard = ({ user }) => {
-    const { id, firstName, lastName, username, email, profilePicture, about } = user;
+    const { id, firstName, lastName, username, email, profilePhoto, about } =
+      user;
   return (
     <div>
       <div className="card bg-base-300 w-96 shadow-sm rounded-md">
         <figure>
-          <img src={profilePicture || avatar} alt="User Profile Photo" />
+          <img src={profilePhoto || avatar} alt="User Profile Photo" />
         </figure>
         <div className="card-body">
           <h2 className="card-title">
