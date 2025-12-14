@@ -109,7 +109,7 @@ const EditProfile = () => {
         );
 
         // Navigate back to profile or feed
-        navigate("/feed");
+        navigate("/profile");
       }
     } catch (error) {
       const response = error.response?.data;

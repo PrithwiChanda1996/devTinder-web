@@ -7,17 +7,17 @@ const FeedActions = ({ user }) => {
   return (
     <>
       <button className="btn flex flex-col items-center justify-center p-4 h-auto min-h-[90px] w-24 gap-2">
-        <img src={connect} className="w-10 h-10" alt="Connect" />
+        <img src={connect} className="w-6 h-6" alt="Connect" />
         <span className="text-sm">Connect</span>
       </button>
 
       <button className="btn flex flex-col items-center justify-center p-4 h-auto min-h-[90px] w-24 gap-2">
-        <img src={ignore} className="w-10 h-10" alt="Ignore" />
+        <img src={ignore} className="w-6 h-6" alt="Ignore" />
         <span className="text-sm">Ignore</span>
       </button>
 
       <button className="btn flex flex-col items-center justify-center p-4 h-auto min-h-[90px] w-24 gap-2">
-        <img src={block} className="w-10 h-10" alt="Block" />
+        <img src={block} className="w-6 h-6" alt="Block" />
         <span className="text-sm">Block</span>
       </button>
     </>

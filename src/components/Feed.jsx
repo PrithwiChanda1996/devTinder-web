@@ -32,7 +32,7 @@ const Feed = () => {
     getFeed();
   }, []);
   return (
-    <div className=" flex justify-center my-4 ">
+    <div className=" flex justify-center my-4 pb-13 ">
       {feed && (
         <UserCard user={feed[0]} actions={<FeedActions user={feed[0]} />} />
       )}
