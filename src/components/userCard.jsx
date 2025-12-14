@@ -1,16 +1,19 @@
-import React from 'react'
-import avatar from '../assets/images/avatar.png';
-import connect from '../assets/images/connect.png';
-import block from '../assets/images/block.png';
-import ignore from '../assets/images/ignore.png';
-const userCard = ({ user }) => {
-    const { id, firstName, lastName, username, email, profilePhoto, about } =
-      user;
+import React from "react";
+import avatar from "../assets/images/avatar.png";
+import FeedActions from "./FeedActions";
+
+const userCard = ({ user, actions }) => {
+  const { id, firstName, lastName, username, email, profilePhoto, about } =
+    user;
   return (
     <div>
       <div className="card bg-base-300 w-96 shadow-sm rounded-md">
-        <figure>
-          <img src={profilePhoto || avatar} alt="User Profile Photo" />
+        <figure className="h-96 w-full overflow-hidden">
+          <img
+            src={profilePhoto || avatar}
+            alt="User Profile Photo"
+            className="w-full h-full object-cover"
+          />
         </figure>
         <div className="card-body">
           <h2 className="card-title">
@@ -21,25 +24,12 @@ const userCard = ({ user }) => {
             show more
           </small>
           <div className="card-actions justify-left flex flex-row gap-3">
-            <button className="btn flex flex-col items-center justify-center p-4 h-auto min-h-[90px] w-24 gap-2">
-              <img src={connect} className="w-10 h-10" />
-              <span className="text-sm">Connect</span>
-            </button>
-
-            <button className="btn flex flex-col items-center justify-center p-4 h-auto min-h-[90px] w-24 gap-2">
-              <img src={ignore} className="w-10 h-10" />
-              <span className="text-sm">Ignore</span>
-            </button>
-
-            <button className="btn flex flex-col items-center justify-center p-4 h-auto min-h-[90px] w-24 gap-2">
-              <img src={block} className="w-10 h-10" />
-              <span className="text-sm">Block</span>
-            </button>
+            {actions || <FeedActions user={user} />}
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default userCard
+export default userCard;
