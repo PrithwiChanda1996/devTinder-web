@@ -144,6 +144,32 @@ const EditProfile = () => {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Profile Photo URL */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Profile Photo URL</span>
+              </label>
+              <input
+                type="url"
+                name="profilePhoto"
+                className="input input-bordered"
+                placeholder="https://example.com/photo.jpg"
+                value={formData.profilePhoto}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="form-control">
+              {formData.profilePhoto && (
+                <div className="mt-2 flex justify-center">
+                  <img
+                    src={formData.profilePhoto}
+                    alt="Profile preview"
+                    className="w-24 h-24 rounded-full object-cover"
+                  />
+                </div>
+              )}
+            </div>
+
             {/* First Name */}
             <div className="form-control">
               <label className="label">
@@ -254,7 +280,7 @@ const EditProfile = () => {
 
           {/* Bio - Full Width */}
           <div className="form-control mt-2">
-            <label className="label">
+            <label className="label mx-2">
               <span className="label-text">Bio</span>
             </label>
             <textarea
@@ -308,7 +334,7 @@ const EditProfile = () => {
           <div className="grid grid-cols-1 gap-4 mt-2">
             {/* GitHub URL */}
             <div className="form-control">
-              <label className="label">
+              <label className="label mx-3">
                 <span className="label-text">GitHub URL</span>
               </label>
               <input
@@ -323,7 +349,7 @@ const EditProfile = () => {
 
             {/* LinkedIn URL */}
             <div className="form-control">
-              <label className="label">
+              <label className="label mx-2">
                 <span className="label-text">LinkedIn URL</span>
               </label>
               <input
@@ -338,7 +364,7 @@ const EditProfile = () => {
 
             {/* Portfolio URL */}
             <div className="form-control">
-              <label className="label">
+              <label className="label mx-2">
                 <span className="label-text">Portfolio URL</span>
               </label>
               <input
@@ -349,30 +375,6 @@ const EditProfile = () => {
                 value={formData.portfolioUrl}
                 onChange={handleInputChange}
               />
-            </div>
-
-            {/* Profile Photo URL */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Profile Photo URL</span>
-              </label>
-              <input
-                type="url"
-                name="profilePhoto"
-                className="input input-bordered"
-                placeholder="https://example.com/photo.jpg"
-                value={formData.profilePhoto}
-                onChange={handleInputChange}
-              />
-              {formData.profilePhoto && (
-                <div className="mt-2 flex justify-center">
-                  <img
-                    src={formData.profilePhoto}
-                    alt="Profile preview"
-                    className="w-24 h-24 rounded-full object-cover"
-                  />
-                </div>
-              )}
             </div>
           </div>
 
