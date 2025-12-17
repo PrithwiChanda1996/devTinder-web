@@ -6,6 +6,7 @@ import { BASE_URL } from "../utils/constants";
 import { setMutualConnections } from "../utils/mutualConnectionSlice";
 import ConnectionCard from "./ConnectionCard";
 import { DisconnectButton } from "./ConnectionActions";
+import avatar from "../assets/logo/avatar.png";
 
 const MutualConnections = () => {
   const connections = useSelector((store) => store.mutualConnection);
@@ -63,7 +64,7 @@ const MutualConnections = () => {
       firstName: connectedUserData.firstName,
       lastName: connectedUserData.lastName,
       username: connectedUserData.username,
-      profilePhoto: connectedUserData.profilePhoto || "/default-avatar.png",
+      profilePhoto: connectedUserData.profilePhoto || avatar,
     };
   };
 

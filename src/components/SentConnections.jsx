@@ -6,6 +6,7 @@ import { BASE_URL } from "../utils/constants";
 import { setsentConnections } from "../utils/sentConnectionSlice";
 import ConnectionCard from "./ConnectionCard";
 import { CancelButton } from "./ConnectionActions";
+import avatar from "../assets/logo/avatar.png";
 
 const SentConnections = () => {
   const connections = useSelector((store) => store.sentConnection);
@@ -55,7 +56,7 @@ const SentConnections = () => {
       firstName: recipientData.firstName,
       lastName: recipientData.lastName,
       username: recipientData.username,
-      profilePhoto: recipientData.profilePhoto || "/default-avatar.png",
+      profilePhoto: recipientData.profilePhoto || avatar,
     };
   };
 
