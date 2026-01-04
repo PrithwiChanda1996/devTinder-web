@@ -11,6 +11,8 @@ import {
 } from "../utils/authUtils";
 import { useToast } from "../context/ToastContext";
 import { removeFeed } from "../utils/feedSlice";
+import { removesentConnections } from "../utils/sentConnectionSlice";
+import { removereceivedConnections } from "../utils/receivedConnectionSlice";
 
 export const useAuth = () => {
   const dispatch = useDispatch();
@@ -158,6 +160,8 @@ export const useAuth = () => {
     clearStoredAuth();
     dispatch(removeUser());
     dispatch(removeFeed());
+    dispatch(removesentConnections());
+    dispatch(removereceivedConnections());
     restoringSession.current = false; // Reset restoration flag
     navigate("/login");
   };
