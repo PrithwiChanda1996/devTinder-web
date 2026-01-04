@@ -10,8 +10,21 @@ const mutualConnectionSlice = createSlice({
     removeMutualConnections: (state, action) => {
       return null;
     },
+    addMutualConnection: (state, action) => {
+      if (!state) {
+        return [action.payload];
+      }
+      if (Array.isArray(state)) {
+        return [...state, action.payload];
+      }
+      return state;
+    },
   },
 });
 
-export const { setMutualConnections, removeMutualConnections } = mutualConnectionSlice.actions;
+export const {
+  setMutualConnections,
+  removeMutualConnections,
+  addMutualConnection,
+} = mutualConnectionSlice.actions;
 export default mutualConnectionSlice.reducer;

@@ -13,6 +13,7 @@ import { useToast } from "../context/ToastContext";
 import { removeFeed } from "../utils/feedSlice";
 import { removesentConnections } from "../utils/sentConnectionSlice";
 import { removereceivedConnections } from "../utils/receivedConnectionSlice";
+import { removeMutualConnections } from "../utils/mutualConnectionSlice";
 
 export const useAuth = () => {
   const dispatch = useDispatch();
@@ -162,6 +163,7 @@ export const useAuth = () => {
     dispatch(removeFeed());
     dispatch(removesentConnections());
     dispatch(removereceivedConnections());
+    dispatch(removeMutualConnections());
     restoringSession.current = false; // Reset restoration flag
     navigate("/login");
   };
