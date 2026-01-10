@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { BASE_URL } from "../utils/constants";
 import { getStoredAuth } from "../utils/authUtils";
 import { removeReceivedConnectionById } from "../utils/receivedConnectionSlice";
-import { addMutualConnection } from "../utils/mutualConnectionSlice";
+import { addMutualConnection, removeMutualConnectionById } from "../utils/mutualConnectionSlice";
 import { removeSentConnectionById } from "../utils/sentConnectionSlice";
 
 const acceptConnection = async (requestId, connection, dispatch) => {
@@ -82,8 +82,40 @@ const cancelSentConnection = async (requestId, dispatch) => {
   }
 };
 
+const disconnectConnection = async (connectionId, dispatch) => {
+  try {
+    const { accessToken } = getStoredAuth();
+    const response = await axios.delete(
+      `${BASE_URL}/connections/${connectionId}/disconnect`,
+      {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    dispatch(removeMutualConnectionById(connectionId));
+
+    return response.data;
+  } catch (error) {
+    console.error("Error disconnecting connection:", error);
+    throw error;
+  }
+};
+
 export const DisconnectButton = ({ connection }) => {
-  return <button className="btn btn-error btn-sm">Disconnect</button>;
+  const dispatch = useDispatch();
+  const { _id: connectionId } = connection;
+
+  const handleDisconnect = async () => {
+    try {
+      await disconnectConnection(connectionId, dispatch);
+    } catch (error) {
+      console.error("Failed to disconnect connection");
+    }
+  };
+  return <button className="btn btn-error btn-sm" onClick={handleDisconnect}>Disconnect</button>;
 };
 
 export const AcceptRejectButtons = ({ connection }) => {

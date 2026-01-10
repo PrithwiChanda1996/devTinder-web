@@ -19,6 +19,12 @@ const mutualConnectionSlice = createSlice({
       }
       return state;
     },
+    removeMutualConnectionById: (state, action) => {
+      if (state && Array.isArray(state)) {
+        return state.filter((connection) => connection._id !== action.payload);
+      }
+      return state;
+    },
   },
 });
 
@@ -26,5 +32,6 @@ export const {
   setMutualConnections,
   removeMutualConnections,
   addMutualConnection,
+  removeMutualConnectionById,
 } = mutualConnectionSlice.actions;
 export default mutualConnectionSlice.reducer;
