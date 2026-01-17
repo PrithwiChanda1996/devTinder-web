@@ -6,6 +6,7 @@ import { getStoredAuth } from "../utils/authUtils";
 import { removeReceivedConnectionById } from "../utils/receivedConnectionSlice";
 import { addMutualConnection, removeMutualConnectionById } from "../utils/mutualConnectionSlice";
 import { removeSentConnectionById } from "../utils/sentConnectionSlice";
+import { removeBlockedConnectionById } from "../utils/blockedConnectionSlice";
 
 const acceptConnection = async (requestId, connection, dispatch) => {
   try {
@@ -166,6 +167,45 @@ export const CancelButton = ({ connection }) => {
   return (
     <button className="btn btn-warning btn-sm" onClick={handleCancel}>
       Cancel
+    </button>
+  );
+};
+
+const unblockConnection = async (userId, connectionId, dispatch) => {
+  try {
+    const { accessToken } = getStoredAuth();
+    const response = await axios.delete(
+      `${BASE_URL}/connections/unblock/${userId}`,
+      {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    dispatch(removeBlockedConnectionById(connectionId));
+    return response.data;
+  } catch (error) {
+    console.error("Error unblocking user:", error);
+    throw error;
+  }
+};
+
+export const UnblockButton = ({ user, connectionId }) => {
+  const dispatch = useDispatch();
+  const userId = user.id;
+
+  const handleUnblock = async () => {
+    try {
+      await unblockConnection(userId, connectionId, dispatch);
+    } catch (error) {
+      console.error("Failed to unblock user");
+    }
+  };
+  return (
+    <button className="btn btn-warning btn-sm" onClick={handleUnblock}>
+      Unblock
     </button>
   );
 };

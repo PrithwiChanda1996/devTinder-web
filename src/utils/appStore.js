@@ -4,6 +4,7 @@ import feedReducer from "./feedSlice";
 import mutualConnectionReducer from "./mutualConnectionSlice";
 import receivedConnectionReducer from "./receivedConnectionSlice";
 import sentConnectionReducer from "./sentConnectionSlice";
+import blockedConnectionReducer from "./blockedConnectionSlice";
 
 const appStore = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const appStore = configureStore({
     mutualConnection: mutualConnectionReducer,
     receivedConnection: receivedConnectionReducer,
     sentConnection: sentConnectionReducer,
+    blockedConnection: blockedConnectionReducer,
   },
 });
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import MutualConnections from "./MutualConnections";
 import ReceivedConnections from "./ReceivedConnections";
 import SentConnections from "./SentConnections";
+import BlockedConnections from "./BlockedConnections";
 
 export const Connections = () => {
   const [activeTab, setActiveTab] = useState("mutual");
@@ -17,6 +18,8 @@ export const Connections = () => {
         return <ReceivedConnections />;
       case "sent":
         return <SentConnections />;
+      case "blocked":
+        return <BlockedConnections />;
       default:
         return <MutualConnections />;
     }
@@ -46,6 +49,13 @@ export const Connections = () => {
             onClick={() => handleTabClick("sent")}
           >
             Sent Connections
+          </a>
+          <a
+            role="tab"
+            className={`tab ${activeTab === "blocked" ? "tab-active" : ""}`}
+            onClick={() => handleTabClick("blocked")}
+          >
+            Blocked
           </a>
         </div>
       </div>

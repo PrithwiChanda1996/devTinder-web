@@ -10,6 +10,7 @@ import Modal from "./Modal";
 import connect from "../assets/icons/connect.png";
 import block from "../assets/icons/block.png";
 import ignore from "../assets/icons/ignore.png";
+import { removeBlockedConnections } from "../utils/blockedConnectionSlice";
 
 const FeedActions = ({ user }) => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const FeedActions = ({ user }) => {
   const handleConnect = async () => {
     const { accessToken } = getStoredAuth();
     try {
-      const response = await axios.post(
+      await axios.post(
         `${BASE_URL}/connections/send`,
         { toUserId: user._id },
         {
@@ -64,6 +65,7 @@ const FeedActions = ({ user }) => {
         }
       );
       dispatch(removeFirstUserFromFeed());
+      dispatch(removeBlockedConnections());
       addToast("success", "User blocked successfully!");
       setShowBlockModal(false);
     } catch (error) {

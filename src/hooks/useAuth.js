@@ -14,6 +14,7 @@ import { removeFeed } from "../utils/feedSlice";
 import { removesentConnections } from "../utils/sentConnectionSlice";
 import { removereceivedConnections } from "../utils/receivedConnectionSlice";
 import { removeMutualConnections } from "../utils/mutualConnectionSlice";
+import { removeBlockedConnections } from "../utils/blockedConnectionSlice";
 
 export const useAuth = () => {
   const dispatch = useDispatch();
@@ -164,6 +165,7 @@ export const useAuth = () => {
     dispatch(removesentConnections());
     dispatch(removereceivedConnections());
     dispatch(removeMutualConnections());
+    dispatch(removeBlockedConnections());
     restoringSession.current = false; // Reset restoration flag
     navigate("/login");
   };
