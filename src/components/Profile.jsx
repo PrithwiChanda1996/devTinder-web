@@ -13,7 +13,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center my-4 pb-13">
+    <div className="flex items-center justify-center px-3 sm:px-4 py-3 sm:py-4 md:py-5">
       <UserCard
         user={user}
         actions={<ProfileActions onEdit={handleEditProfile} />}
