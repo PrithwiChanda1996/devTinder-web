@@ -49,7 +49,7 @@ const Feed = () => {
   }
 
   return (
-    <div className="flex justify-center my-3 sm:my-4 md:my-5 px-3 sm:px-4 pb-3 sm:pb-4">
+    <div className="flex justify-center my-2 sm:my-3 px-3 sm:px-4 pb-3 sm:pb-4 md:pb-2">
       {feed && feed[0] ? (
         <UserCard user={feed[0]} actions={<FeedActions user={feed[0]} />} />
       ) : (

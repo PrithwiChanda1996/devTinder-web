@@ -80,10 +80,10 @@ const FeedActions = ({ user }) => {
   return (
     <>
       {/* Connect Button with Label */}
-      <div className="flex flex-col items-center gap-1.5">
+      <div className="flex flex-col items-center gap-1">
         <button
           onClick={handleConnect}
-          className="btn btn-circle bg-base-200 hover:bg-base-300 border-2 border-base-content/10 hover:border-primary flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 hover:scale-110 transition-all shadow-lg p-0 overflow-hidden"
+          className="btn btn-circle bg-base-200 hover:bg-base-300 border-2 border-base-content/10 hover:border-primary flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 md:w-14 md:h-14 hover:scale-110 transition-all shadow-lg p-0 overflow-hidden"
           aria-label="Send connection request"
           title="Connect"
         >
@@ -94,16 +94,16 @@ const FeedActions = ({ user }) => {
             aria-hidden="true"
           />
         </button>
-        <span className="text-xs font-medium text-base-content/70">
+        <span className="text-[10px] sm:text-xs font-medium text-base-content/70">
           Connect
         </span>
       </div>
 
       {/* Ignore Button with Label */}
-      <div className="flex flex-col items-center gap-1.5">
+      <div className="flex flex-col items-center gap-1">
         <button
           onClick={handleIgnore}
-          className="btn btn-circle bg-base-200 hover:bg-base-300 border-2 border-base-content/10 hover:border-warning flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 hover:scale-110 transition-all shadow-lg p-0 overflow-hidden"
+          className="btn btn-circle bg-base-200 hover:bg-base-300 border-2 border-base-content/10 hover:border-warning flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 md:w-14 md:h-14 hover:scale-110 transition-all shadow-lg p-0 overflow-hidden"
           aria-label="Ignore this profile"
           title="Ignore"
         >
@@ -114,16 +114,16 @@ const FeedActions = ({ user }) => {
             aria-hidden="true"
           />
         </button>
-        <span className="text-xs font-medium text-base-content/70">
+        <span className="text-[10px] sm:text-xs font-medium text-base-content/70">
           Ignore
         </span>
       </div>
 
       {/* Block Button with Label */}
-      <div className="flex flex-col items-center gap-1.5">
+      <div className="flex flex-col items-center gap-1">
         <button
           onClick={handleBlock}
-          className="btn btn-circle bg-base-200 hover:bg-base-300 border-2 border-base-content/10 hover:border-error flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 hover:scale-110 transition-all shadow-lg p-0 overflow-hidden"
+          className="btn btn-circle bg-base-200 hover:bg-base-300 border-2 border-base-content/10 hover:border-error flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 md:w-14 md:h-14 hover:scale-110 transition-all shadow-lg p-0 overflow-hidden"
           aria-label="Block this user"
           title="Block"
         >
@@ -134,7 +134,7 @@ const FeedActions = ({ user }) => {
             aria-hidden="true"
           />
         </button>
-        <span className="text-xs font-medium text-base-content/70">
+        <span className="text-[10px] sm:text-xs font-medium text-base-content/70">
           Block
         </span>
       </div>

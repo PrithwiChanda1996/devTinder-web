@@ -26,10 +26,10 @@ const UserCard = ({ user, actions }) => {
   const [showMore, setShowMore] = useState(false);
 
   return (
-    <div className="w-full max-w-sm sm:max-w-md md:max-w-lg">
+    <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
       <div className="card bg-base-300 shadow-xl rounded-lg overflow-hidden">
-        {/* Profile Image - Square aspect ratio for 400x400 crops */}
-        <figure className="aspect-square w-full max-w-md mx-auto overflow-hidden bg-base-200 flex items-center justify-center">
+        {/* Profile Image - Optimized size across all devices */}
+        <figure className="aspect-square w-full max-w-[240px] sm:max-w-[260px] md:max-w-[280px] mx-auto mt-3 sm:mt-4 overflow-hidden bg-base-200 flex items-center justify-center">
           <img
             src={profilePhoto || defaultAvatar}
             alt={`${firstName} ${lastName}'s profile`}
@@ -42,8 +42,8 @@ const UserCard = ({ user, actions }) => {
           />
         </figure>
 
-        {/* Card Body - Reduced padding */}
-        <div className="card-body p-3 sm:p-4 md:p-5 space-y-2 sm:space-y-2.5">
+        {/* Card Body - Reduced padding for compact layout */}
+        <div className="card-body p-2.5 sm:p-3 md:p-4 space-y-2 sm:space-y-2.5">
           {/* Name and Username - More compact */}
           <div>
             <h2 className="card-title text-base sm:text-lg md:text-xl font-bold text-base-content leading-tight">
@@ -242,7 +242,7 @@ const UserCard = ({ user, actions }) => {
 
           {/* Show More/Less Toggle */}
           <button
-            className="text-xs sm:text-sm text-primary cursor-pointer hover:underline mt-1.5 flex items-center gap-1.5 ml-auto font-medium transition-colors"
+            className="text-xs sm:text-sm text-primary cursor-pointer hover:underline mt-1.5 md:mt-0.5 flex items-center gap-1.5 ml-auto font-medium transition-colors"
             onClick={() => setShowMore(!showMore)}
             aria-expanded={showMore}
             aria-label={showMore ? "Show less details" : "Show more details"}
@@ -287,7 +287,7 @@ const UserCard = ({ user, actions }) => {
           </button>
 
           {/* Action Buttons - More compact */}
-          <div className="card-actions justify-center flex flex-row gap-2 sm:gap-3 mt-3 sm:mt-3.5">
+          <div className="card-actions justify-center flex flex-row gap-3 sm:gap-4 md:gap-3 mt-2 sm:mt-2.5">
             {actions || <FeedActions user={user} />}
           </div>
         </div>
